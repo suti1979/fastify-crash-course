@@ -1,12 +1,14 @@
-const fastify = require('fastify')({ logger: true })
-fastify.register(require('fastify-swagger'), {
+const fastify = require("fastify")({ logger: true })
+
+fastify.register(require("fastify-swagger"), {
   exposeRoute: true,
-  routePrefix: '/docs',
+  routePrefix: "/docs",
   swagger: {
-    info: { title: 'fastify-api' },
+    info: { title: "fastify-api" },
   },
 })
-fastify.register(require('./routes/items'))
+
+fastify.register(require("./routes/items"))
 
 const PORT = 5000
 
