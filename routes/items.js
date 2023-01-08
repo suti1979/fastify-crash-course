@@ -96,7 +96,30 @@ const updateItemOpts = {
   handler: updateItem,
 }
 
+
+
+const authMiddleware = function (request, reply, done) {
+  const authCookie = request.cookies["auth_token"]
+  if (!authCookie) {
+    // the auth_token cookie is not present
+    return reply.send(401, "Unauthorized")
+  }
+  // the auth_token cookie is present
+  // you can now verify the token and proceed with the request
+  done()
+}
+
 function itemRoutes(fastify, options, done) {
+  fastify.post("/login", (request, reply) => {
+    // set the auth_token cookie
+    reply.setCookie("auth_token", "za42", {
+      path: "/",
+      httpOnly: true,
+      secure: false,
+      maxAge: 3600,
+    })
+    reply.send({ message: "ok" })
+  })
   // Get all items
   fastify.get("/items", getItemsOpts)
 
