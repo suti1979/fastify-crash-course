@@ -1,6 +1,6 @@
 const fastify = require("fastify")({ logger: true, Credentials: "include" })
 
-//fastify.register(require("fastify-cookie"))
+
 
 fastify.register(require("fastify-swagger"), {
   exposeRoute: true,
@@ -9,8 +9,8 @@ fastify.register(require("fastify-swagger"), {
     info: { title: "fastify-api" },
   },
 })
-
-//fastify.register(require("./routes/items"))
+fastify.register(require("fastify-cookie"))
+fastify.register(require("./routes/items"))
 
 const PORT = 3001
 
